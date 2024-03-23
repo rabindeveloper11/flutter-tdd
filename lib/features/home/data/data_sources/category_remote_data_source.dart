@@ -1,5 +1,4 @@
 import 'package:flutter_assesment/core/error/exception.dart';
-import 'package:flutter_assesment/core/error/failure.dart';
 import 'package:flutter_assesment/features/home/data/models/category_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,7 +25,9 @@ class CategorySourceDataImpl implements CategoryRemoteDataSource {
       /// returning the empty list of categories for now
       ///
 
-      final List<CategoryModel> categories = [];
+      final List<CategoryModel> categories = []; 
+
+      
 
       /// here we can carry out the mapping of the response to the model
       /// since the api that are required my the UI are is not found with the

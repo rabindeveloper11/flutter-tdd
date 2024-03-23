@@ -26,4 +26,8 @@ class CategoryModel extends CategoryEntity {
       'image': image,
     };
   }
+
+  CategoryEntity toEntity() {
+    return CategoryEntity(id: id, name: name, image: image);
+  }
 }
