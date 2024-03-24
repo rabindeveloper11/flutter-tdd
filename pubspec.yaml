@@ -40,10 +40,10 @@ dependencies:
   flutter_bloc: ^8.1.4
   get_it: ^7.6.7
   http: ^1.2.1
+  bloc_test: ^9.1.6
 
 
 dev_dependencies:
-  bloc_test: ^9.1.6
   build_runner: ^2.4.8
   mockito: ^5.4.4
   mocktail: ^1.0.3

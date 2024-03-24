@@ -25,9 +25,7 @@ class CategorySourceDataImpl implements CategoryRemoteDataSource {
       /// returning the empty list of categories for now
       ///
 
-      final List<CategoryModel> categories = []; 
-
-      
+      final List<CategoryModel> categories = [];
 
       /// here we can carry out the mapping of the response to the model
       /// since the api that are required my the UI are is not found with the
@@ -35,8 +33,6 @@ class CategorySourceDataImpl implements CategoryRemoteDataSource {
 
       return categories;
     } else {
-      await Future.delayed(Duration(seconds: 2));
-
       /// we are throwing the ServerException in case of any error from the server
       /// we can also throw the custom exception here
       throw ServerException();

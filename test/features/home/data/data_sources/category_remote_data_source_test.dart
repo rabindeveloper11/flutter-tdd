@@ -1,5 +1,4 @@
 import 'package:flutter_assesment/core/error/exception.dart';
-import 'package:flutter_assesment/core/error/failure.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/category_remote_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/category_model.dart';
 import 'package:flutter_test/flutter_test.dart';

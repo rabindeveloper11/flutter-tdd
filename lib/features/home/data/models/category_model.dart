@@ -1,6 +1,7 @@
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 
 class CategoryModel extends CategoryEntity {
+  
   final String id;
   final String name;
   final String image;
