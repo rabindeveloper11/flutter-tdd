@@ -1,6 +1,7 @@
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 
 class CategoryModel extends CategoryEntity {
+  
   final String id;
   final String name;
   final String image;
@@ -25,5 +26,9 @@ class CategoryModel extends CategoryEntity {
       'name': name,
       'image': image,
     };
+  }
+
+  CategoryEntity toEntity() {
+    return CategoryEntity(id: id, name: name, image: image);
   }
 }
