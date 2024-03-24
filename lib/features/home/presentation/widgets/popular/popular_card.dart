@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
+import 'package:flutter_assesment/core/widgets/like_button.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,8 +14,8 @@ class PopularCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 212,
-          height: 280,
+          width: 212.w,
+          height: 280.h,
           decoration: ShapeDecoration(
             image: const DecorationImage(
               image: NetworkImage(
@@ -26,31 +27,7 @@ class PopularCard extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          top: 16.h,
-          right: 16.w,
-          child: Container(
-            width: 32,
-            height: 32,
-            decoration: ShapeDecoration(
-              color: AppColors.primaryColor,
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(
-                  width: 1,
-                  color: AppColors.primaryColor,
-                ),
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.favorite,
-                color: AppColors.selectedIconColor,
-                size: 18,
-              ),
-            ),
-          ),
-        ),
+        Positioned(top: 16.h, right: 16.w, child: const LikeButton()),
         Positioned(
           bottom: 28.h,
           left: 24.w,

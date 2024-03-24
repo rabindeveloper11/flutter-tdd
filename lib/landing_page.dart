@@ -10,16 +10,19 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _pages = [
+    /// pages for each index is defined here, you can replace it with your own pages
+    /// pages should be the same length as the number of items in the bottom navigation bar
+    /// if that is not the case the pages will not be rendered in the UI
+    final pages = [
       HomeScreen(),
-      Container(color: Colors.red),
-      Container(color: Colors.green),
-      Container(color: Colors.blue),
+      const Center(child: Text("Liked Screen")),
+      const Center(child: Text("Chat Screen")),
+      const Center(child: Text("Settings Screen")),
     ];
     return ValueListenableBuilder(
       valueListenable: _currentIndex,
       builder: (context, value, child) => Scaffold(
-        body: _pages[_currentIndex.value],
+        body: pages[_currentIndex.value], // show the page for the current index
         bottomNavigationBar: ValueListenableBuilder(
           valueListenable: _currentIndex,
           builder: (context, value, child) => CustomBottomNavigationBar(
