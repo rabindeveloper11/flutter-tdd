@@ -69,13 +69,8 @@ void main() {
       expect(
         result,
         equals(
-          const Left(
-            ConnectionFailure(message: 'No Internet Connection'),
-          ),
-        ),
+            const Left(ConnectionFailure(message: 'No Internet Connection'))),
       );
     });
   });
 }
-
-class SocketException {}
