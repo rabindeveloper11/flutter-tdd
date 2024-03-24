@@ -5,6 +5,7 @@ const kFontFamily = 'Rubik';
 final themeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF8F8F8)),
   primaryColor: AppColors.primaryColor,
+
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.textFieldTextColor,
     selectionColor: AppColors.textFieldTextColor,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assesment/config/routes/route.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
-import 'package:flutter_assesment/features/home/presentation/pages/home_screen.dart';
-import 'package:flutter_assesment/features/tour/presentation/pages/tour_page.dart';
 import 'package:flutter_assesment/landing_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter TDD with Clean Architecture',
         theme: themeData,
         home: LandingPage(),
+        onGenerateRoute: Routes.generateRoute,
       ),
     );
   }

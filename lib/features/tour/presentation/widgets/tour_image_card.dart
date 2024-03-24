@@ -35,7 +35,9 @@ class TourImageCard extends StatelessWidget {
         Positioned(
           top: 24,
           left: 24,
-          child: SVGUtils.svgFromAsset(Assets.icons.back),
+          child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SVGUtils.svgFromAsset(Assets.icons.back)),
         ),
         const Positioned(bottom: -10, right: 28, child: LikeButton()),
         Positioned(
