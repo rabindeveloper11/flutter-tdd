@@ -1,5 +1,7 @@
 import 'package:flutter_assesment/features/home/data/data_sources/category_remote_data_source.dart';
+import 'package:flutter_assesment/features/home/data/data_sources/popular_remote_data_source.dart';
 import 'package:flutter_assesment/features/home/domain/repositories/category_repository.dart';
+import 'package:flutter_assesment/features/home/domain/repositories/popular_repository.dart';
 import 'package:flutter_assesment/features/home/domain/usecases/get_all_categories.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +10,9 @@ import 'package:http/http.dart' as http;
   [
     CategoryRepository,
     CategoryRemoteDataSource,
-    GetAllCategoriesUserCase,
+    GetAllCategoriesUserCase, 
+    PopularRepository,  
+    PopularRemoteDataSource,
   ],
   customMocks: [
     MockSpec<http.Client>(as: #MockHttpClient),

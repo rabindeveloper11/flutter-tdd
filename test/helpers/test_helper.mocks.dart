@@ -4,24 +4,32 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:convert' as _i11;
-import 'dart:typed_data' as _i13;
+import 'dart:convert' as _i15;
+import 'dart:typed_data' as _i17;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:flutter_assesment/core/error/failure.dart' as _i6;
 import 'package:flutter_assesment/features/home/data/data_sources/category_remote_data_source.dart'
     as _i8;
+import 'package:flutter_assesment/features/home/data/data_sources/popular_remote_data_source.dart'
+    as _i13;
 import 'package:flutter_assesment/features/home/data/models/category_model.dart'
     as _i9;
+import 'package:flutter_assesment/features/home/data/models/popular_model.dart'
+    as _i14;
 import 'package:flutter_assesment/features/home/domain/entities/category.dart'
     as _i7;
+import 'package:flutter_assesment/features/home/domain/entities/popular.dart'
+    as _i12;
 import 'package:flutter_assesment/features/home/domain/repositories/category_repository.dart'
     as _i3;
+import 'package:flutter_assesment/features/home/domain/repositories/popular_repository.dart'
+    as _i11;
 import 'package:flutter_assesment/features/home/domain/usecases/get_all_categories.dart'
     as _i10;
 import 'package:http/http.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i12;
+import 'package:mockito/src/dummies.dart' as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -163,6 +171,53 @@ class MockGetAllCategoriesUserCase extends _i1.Mock
       ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.CategoryEntity>>>);
 }
 
+/// A class which mocks [PopularRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPopularRepository extends _i1.Mock implements _i11.PopularRepository {
+  MockPopularRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, List<_i12.PopularEntity>>>
+      getAllPopular() => (super.noSuchMethod(
+            Invocation.method(
+              #getAllPopular,
+              [],
+            ),
+            returnValue: _i5.Future<
+                    _i2.Either<_i6.Failure, List<_i12.PopularEntity>>>.value(
+                _FakeEither_0<_i6.Failure, List<_i12.PopularEntity>>(
+              this,
+              Invocation.method(
+                #getAllPopular,
+                [],
+              ),
+            )),
+          ) as _i5.Future<_i2.Either<_i6.Failure, List<_i12.PopularEntity>>>);
+}
+
+/// A class which mocks [PopularRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPopularRemoteDataSource extends _i1.Mock
+    implements _i13.PopularRemoteDataSource {
+  MockPopularRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i14.PopularModel>> getPopulars() => (super.noSuchMethod(
+        Invocation.method(
+          #getPopulars,
+          [],
+        ),
+        returnValue:
+            _i5.Future<List<_i14.PopularModel>>.value(<_i14.PopularModel>[]),
+      ) as _i5.Future<List<_i14.PopularModel>>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -218,7 +273,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i11.Encoding? encoding,
+    _i15.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -249,7 +304,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i11.Encoding? encoding,
+    _i15.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -280,7 +335,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i11.Encoding? encoding,
+    _i15.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -311,7 +366,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i11.Encoding? encoding,
+    _i15.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -348,7 +403,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<String>.value(_i12.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i16.dummyValue<String>(
           this,
           Invocation.method(
             #read,
@@ -359,7 +414,7 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
       ) as _i5.Future<String>);
 
   @override
-  _i5.Future<_i13.Uint8List> readBytes(
+  _i5.Future<_i17.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -369,8 +424,8 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<_i13.Uint8List>.value(_i13.Uint8List(0)),
-      ) as _i5.Future<_i13.Uint8List>);
+        returnValue: _i5.Future<_i17.Uint8List>.value(_i17.Uint8List(0)),
+      ) as _i5.Future<_i17.Uint8List>);
 
   @override
   _i5.Future<_i4.StreamedResponse> send(_i4.BaseRequest? request) =>

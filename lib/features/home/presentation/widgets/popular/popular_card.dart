@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_assesment/config/routes/route_contants.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
 import 'package:flutter_assesment/core/widgets/like_button.dart';
-import 'package:flutter_assesment/features/tour/presentation/pages/tour_page.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +25,7 @@ class PopularCard extends StatelessWidget {
             height: 280.h,
             decoration: ShapeDecoration(
               image: const DecorationImage(
-                image: NetworkImage(
+                image: CachedNetworkImageProvider(
                     "https://images.unsplash.com/photo-1711100360031-24aaccbcd408?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
                 fit: BoxFit.cover,
               ),

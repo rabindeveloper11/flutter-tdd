@@ -20,8 +20,8 @@ void main() {
   group('Categories Testing', () {
     test('Testing for the categories when response is 200 ', () async {
       // arrange
-// passing the empty url to the string because of the fact that the UI and
-// the public API are not quite a match
+      /// passing the empty url to the string because of the fact that the UI and
+      /// the public API are not quite a match
 
       when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
         (_) async => http.Response(
@@ -29,18 +29,19 @@ void main() {
           200,
         ),
       );
-      //act
+
+      ///act
 
       final result = await categoryRemoteDataSource.getCategories();
 
-      //assert
+      ///assert
 
       expect(result, isA<List<CategoryModel>>());
     });
   });
 
   test("Testing for the categories when the response is not 200 ", () async {
-    // testing the class
+    /// testing the class
     when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
       (_) async => http.Response(
         'Error occurred',

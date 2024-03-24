@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
@@ -19,7 +20,7 @@ class TourImageCard extends StatelessWidget {
           height: 397.h,
           decoration: ShapeDecoration(
             image: const DecorationImage(
-              image: NetworkImage(
+              image: CachedNetworkImageProvider(
                   "https://images.unsplash.com/photo-1707327259268-2741b50ef5e5?q=80&w=2875&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
               fit: BoxFit.cover,
             ),
