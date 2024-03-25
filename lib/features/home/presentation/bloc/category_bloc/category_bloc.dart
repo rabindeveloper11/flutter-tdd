@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 import 'package:flutter_assesment/features/home/domain/usecases/get_all_categories.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_event.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_state.dart';
@@ -19,8 +17,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           CategoryLoaded(categories: r),
         ),
       );
-
-      
     });
   }
 }
