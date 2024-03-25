@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 import 'package:flutter_assesment/features/home/domain/entities/popular.dart';
 
 abstract class PopularState extends Equatable {
@@ -14,12 +13,12 @@ class PopularInitial extends PopularState {}
 class PopularLoading extends PopularState {}
 
 class PopularLoaded extends PopularState {
-  final List<PopularEntity> categories;
+  final List<PopularEntity> populars;
 
-  const PopularLoaded({required this.categories});
+  const PopularLoaded({required this.populars});
 
   @override
-  List<Object> get props => [categories];
+  List<Object> get props => [populars];
 }
 
 class PopularError extends PopularState {

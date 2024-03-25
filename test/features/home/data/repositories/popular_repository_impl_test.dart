@@ -57,12 +57,52 @@ void main() {
       );
     });
 
-    
-
     test('Testing for Socket Exception', () async {
       /// arrange
       when(mockPopularRemoteDataSource.getPopulars())
           .thenThrow(SocketException());
+    });
+  });
+
+  group('search the popular', () {
+    test('search() returns a list of PopularEntity when successful', () async {
+      /// arrange
+      List<PopularModel> populars = [];
+      when(mockPopularRemoteDataSource.search(''))
+          .thenAnswer((_) async => populars);
+
+      /// act
+
+      final result = await popularRepositoryImpl.search('');
+
+      /// assert
+
+      expect(result, equals(Right(populars)));
+    });
+
+    test("Testing for server exception", () async {
+      /// arrange
+      when(mockPopularRemoteDataSource.search('')).thenThrow(ServerException());
+
+      // act
+
+      final result = await popularRepositoryImpl.search('');
+
+      // assert
+
+      expect(
+        result,
+        equals(
+          const Left(
+            ServerFailure(message: 'Server Error'),
+          ),
+        ),
+      );
+    });
+
+    test('Testing for Socket Exception', () async {
+      /// arrange
+      when(mockPopularRemoteDataSource.search('')).thenThrow(SocketException());
     });
   });
 }

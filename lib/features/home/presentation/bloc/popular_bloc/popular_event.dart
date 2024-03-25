@@ -13,3 +13,13 @@ class GetPopularsEvent extends PopularEvent {
   @override
   List<Object> get props => [];
 }
+
+
+class SeachPopularsEvent extends PopularEvent {
+  final String query;
+
+  const SeachPopularsEvent(this.query);
+
+  @override
+  List<Object> get props => [query];
+}

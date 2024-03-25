@@ -1,9 +1,13 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
+import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
 import 'package:flutter_assesment/features/home/data/models/popular_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class PopularRemoteDataSource {
   Future<List<PopularModel>> getPopulars();
+  Future<List<PopularModel>> search(String query);
 }
 
 class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
@@ -18,10 +22,10 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
     /// the public API are not quite a match ( as per initial research)
     ///
     ///
-    final response = await client.get(Uri.parse(''));
+    final response =
+        await client.get(Uri.parse('https://rabinacharya.info.np'));
 
     /// converting into the model and returning the list of popular from here
-
     if (response.statusCode == 200) {
       /// converting into the model and returning the list of popular from here
       /// currently assuming that the modeling is done correctly
@@ -39,5 +43,19 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
       /// we can also throw the custom exception here
       throw ServerException();
     }
+  }
+
+  @override
+  Future<List<PopularModel>> search(String query) async {
+    /// mocking the real server request delay in real api scenario
+    searchFromList() async {
+      await Future.delayed(const Duration(milliseconds: 800));
+      final products = popularDummyData.where((element) {
+        return element.title.contains(query);
+      }).toList();
+      return products;
+    }
+
+    return searchFromList();
   }
 }

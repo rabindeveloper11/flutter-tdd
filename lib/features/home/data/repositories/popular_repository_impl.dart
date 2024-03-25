@@ -24,4 +24,19 @@ class PopularRepositoryImpl implements PopularRepository {
       return const Left(ConnectionFailure(message: 'No Internet Connections'));
     }
   }
+  
+  @override
+  Future<Either<Failure, List<PopularEntity>>> search(String query) async{
+   
+
+   try {
+      final res = await remoteDataSource.search(query);
+      return Right(res);
+    } on ServerException {
+      return const Left(ServerFailure(message: 'Server Error'));
+    } on SocketException {
+      return const Left(ConnectionFailure(message: 'No Internet Connections'));
+    }
+
+  }
 }

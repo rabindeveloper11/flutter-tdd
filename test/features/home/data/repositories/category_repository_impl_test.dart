@@ -73,4 +73,61 @@ void main() {
       );
     });
   });
+
+  group('Testing for Category Search Functionality', () {
+    test(
+        'search(query) should return the List<CategoryModel> when the query is empty',
+        () async {
+      /// arrange
+
+      List<CategoryModel> categories = [];
+      when(mockCategoryRemoteDataSource.search(''))
+          .thenAnswer((_) async => categories);
+
+      ///act
+
+      final result = await categoryRepositoryImpl.search('');
+
+      /// assert
+
+      expect(result, equals(Right(categories)));
+    });
+
+    test(
+        'search(query) should return the List<CategoryModel> when the query is not empty',
+        () async {
+      /// arrange
+
+      List<CategoryModel> categories = [];
+      when(mockCategoryRemoteDataSource.search(''))
+          .thenAnswer((_) async => categories);
+
+      ///act
+
+      final result = await categoryRepositoryImpl.search('');
+
+      /// assert
+
+      expect(result, equals(Right(categories)));
+    });
+
+    test('Testing for server exception', () async {
+      /// arrange
+      when(mockCategoryRemoteDataSource.search(''))
+          .thenThrow(ServerException());
+
+      /// act
+      final result = await categoryRepositoryImpl.search('');
+
+      /// assert
+      expect(
+        result,
+        equals(
+          const Left(
+            ServerFailure(message: 'Server Error'),
+          ),
+        ),
+      );
+    });
+  });
 }

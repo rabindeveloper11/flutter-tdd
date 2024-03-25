@@ -14,3 +14,12 @@ abstract class CategoryEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+  class SearchCategoriesEvent extends CategoryEvent {
+    final String query;
+  
+    const SearchCategoriesEvent(this.query); 
+  
+    @override
+    List<Object> get props => [query];
+  }

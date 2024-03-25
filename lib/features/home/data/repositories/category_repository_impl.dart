@@ -24,4 +24,17 @@ class CategoryRepositoryImpl implements CategoryRepository {
       return const Left(ServerFailure(message: 'Server Error'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<CategoryEntity>>> search(String query) async {
+    try {
+      final res = await remoteDataSource.search(query);
+
+      return Right(res);
+    } on SocketException {
+      return const Left(ConnectionFailure(message: 'No Internet Connection'));
+    } on ServerException {
+      return const Left(ServerFailure(message: 'Server Error'));
+    }
+  }
 }

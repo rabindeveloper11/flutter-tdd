@@ -51,5 +51,37 @@ void main() {
         throwsA(isA<ServerException>()),
       );
     });
+
+    test("Testing for the search when the query is empty", () async {
+      /// testing the class
+      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+        (_) async => http.Response(
+          readJson('dummy_data/popular_all_response.json'),
+          200,
+        ),
+      );
+
+      /// act
+      final result = await mockPopularRemoteDataSource.search('');
+
+      /// assert
+      expect(result, isA<List<PopularModel>>());
+    });
+
+    test("Testing for the search when the query is not empty", () async {
+      /// testing the class
+      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+        (_) async => http.Response(
+          readJson('dummy_data/popular_all_response.json'),
+          200,
+        ),
+      );
+
+      /// act
+      final result = await mockPopularRemoteDataSource.search('a');
+
+      /// assert
+      expect(result, isA<List<PopularModel>>());
+    });
   });
 }

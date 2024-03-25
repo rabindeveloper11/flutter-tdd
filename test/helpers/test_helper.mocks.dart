@@ -125,6 +125,25 @@ class MockCategoryRepository extends _i1.Mock
               ),
             )),
           ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>> search(
+          String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i8.CategoryEntity>>(
+          this,
+          Invocation.method(
+            #search,
+            [query],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>);
 }
 
 /// A class which mocks [CategoryRemoteDataSource].
@@ -141,6 +160,17 @@ class MockCategoryRemoteDataSource extends _i1.Mock
         Invocation.method(
           #getCategories,
           [],
+        ),
+        returnValue:
+            _i6.Future<List<_i10.CategoryModel>>.value(<_i10.CategoryModel>[]),
+      ) as _i6.Future<List<_i10.CategoryModel>>);
+
+  @override
+  _i6.Future<List<_i10.CategoryModel>> search(String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
         ),
         returnValue:
             _i6.Future<List<_i10.CategoryModel>>.value(<_i10.CategoryModel>[]),
@@ -182,6 +212,25 @@ class MockGetAllCategoriesUserCase extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>> search(
+          String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i8.CategoryEntity>>(
+          this,
+          Invocation.method(
+            #search,
+            [query],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.CategoryEntity>>>);
 }
 
 /// A class which mocks [PopularRepository].
@@ -209,6 +258,25 @@ class MockPopularRepository extends _i1.Mock implements _i4.PopularRepository {
               ),
             )),
           ) as _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>> search(
+          String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i12.PopularEntity>>(
+          this,
+          Invocation.method(
+            #search,
+            [query],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>);
 }
 
 /// A class which mocks [PopularRemoteDataSource].
@@ -225,6 +293,17 @@ class MockPopularRemoteDataSource extends _i1.Mock
         Invocation.method(
           #getPopulars,
           [],
+        ),
+        returnValue:
+            _i6.Future<List<_i14.PopularModel>>.value(<_i14.PopularModel>[]),
+      ) as _i6.Future<List<_i14.PopularModel>>);
+
+  @override
+  _i6.Future<List<_i14.PopularModel>> search(String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
         ),
         returnValue:
             _i6.Future<List<_i14.PopularModel>>.value(<_i14.PopularModel>[]),
@@ -263,6 +342,25 @@ class MockGetAllPopularUsecase extends _i1.Mock
           Invocation.method(
             #call,
             [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>> search(
+          String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i12.PopularEntity>>(
+          this,
+          Invocation.method(
+            #search,
+            [query],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i7.Failure, List<_i12.PopularEntity>>>);

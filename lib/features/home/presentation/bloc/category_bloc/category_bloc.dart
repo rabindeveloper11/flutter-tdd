@@ -4,13 +4,12 @@ import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final GetAllCategoriesUserCase getAllCategoriesUserCase;
+  final GetAllCategoriesUserCase _getAllCategoriesUserCase;
 
-  CategoryBloc({required this.getAllCategoriesUserCase})
-      : super(CategoryInitial()) {
+  CategoryBloc(this._getAllCategoriesUserCase) : super(CategoryInitial()) {
     on<GetCategoriesEvent>((event, emit) async {
       emit(CategoryLoading());
-      final result = await getAllCategoriesUserCase.call();
+      final result = await _getAllCategoriesUserCase.call();
       result.fold(
         (failure) => emit(CategoryError(message: failure.message)),
         (r) => emit(
@@ -18,5 +17,20 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         ),
       );
     });
+
+    on<SearchCategoriesEvent>(
+      (event, emit) async {
+        emit(CategoryLoading());
+
+        final result = await _getAllCategoriesUserCase.search(event.query);
+
+        result.fold(
+          (failure) => emit(CategoryError(message: failure.message)),
+          (r) => emit(
+            CategoryLoaded(categories: r),
+          ),
+        );
+      },
+    );
   }
 }
