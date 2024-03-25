@@ -23,9 +23,8 @@ void main() {
     popularBloc.close();
   });
 
+  final List<PopularEntity> populars = [];
   group('PopularBloc', () {
-    final List<PopularEntity> populars = [];
-
     test('Initial bloc state should be [PopularInital]', () {});
 
     blocTest<PopularBloc, PopularState>(
@@ -84,15 +83,17 @@ void main() {
     );
 
     blocTest<PopularBloc, PopularState>(
-      '',
+     'should emit [PopularLoading(), PopularLoaded()] in order when the exception occurs',
       build: () {
+        when(getAllPopularUsecase.search('query'))
+            .thenAnswer((_) async => Right(populars));
+
         return popularBloc;
       },
       act: (bloc) async => bloc.add(const SeachPopularsEvent('query')),
-      expect: () => [
-        PopularLoading(),
-        const PopularLoaded(populars: []),
-      ],
+      expect: () => [PopularLoading(), const PopularLoaded(populars: [])],
     );
+
+    ///
   });
 }

@@ -21,7 +21,7 @@ void main() {
   group("Testing the popular remote data source", () {
     test("Testing for the popular when response is 200", () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      when(mockHttpClient.get(any)).thenAnswer(
         (_) async => http.Response(
           readJson('dummy_data/popular_all_response.json'),
           200,
@@ -38,7 +38,7 @@ void main() {
 
     test("Testing for the popular when the response is not 200", () async {
       /// testing the class
-      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      when(mockHttpClient.get(any)).thenAnswer(
         (_) async => http.Response(
           'Error occurred',
           404,
@@ -54,7 +54,7 @@ void main() {
 
     test("Testing for the search when the query is empty", () async {
       /// testing the class
-      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      when(mockHttpClient.get(any)).thenAnswer(
         (_) async => http.Response(
           readJson('dummy_data/popular_all_response.json'),
           200,
@@ -70,7 +70,7 @@ void main() {
 
     test("Testing for the search when the query is not empty", () async {
       /// testing the class
-      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      when(mockHttpClient.get(any)).thenAnswer(
         (_) async => http.Response(
           readJson('dummy_data/popular_all_response.json'),
           200,

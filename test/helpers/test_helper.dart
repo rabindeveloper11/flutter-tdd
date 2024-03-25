@@ -4,6 +4,9 @@ import 'package:flutter_assesment/features/home/domain/repositories/category_rep
 import 'package:flutter_assesment/features/home/domain/repositories/popular_repository.dart';
 import 'package:flutter_assesment/features/home/domain/usecases/get_all_categories.dart';
 import 'package:flutter_assesment/features/home/domain/usecases/get_all_popular.dart';
+import 'package:flutter_assesment/features/tour/data/data-sources/tour_detail_data_source.dart';
+import 'package:flutter_assesment/features/tour/domain/repositories/tour_repository.dart';
+import 'package:flutter_assesment/features/tour/domain/usecases/get_tour_detail.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,10 +14,13 @@ import 'package:http/http.dart' as http;
   [
     CategoryRepository,
     CategoryRemoteDataSource,
-    GetAllCategoriesUserCase, 
-    PopularRepository,  
+    GetAllCategoriesUserCase,
+    PopularRepository,
     PopularRemoteDataSource,
     GetAllPopularUsecase,
+    TourRepository,
+    TourRemoteDetailDataSource, 
+    GetTourDetailUseCase,
   ],
   customMocks: [
     MockSpec<http.Client>(as: #MockHttpClient),

@@ -1,46 +1,37 @@
-import 'package:flutter_assesment/features/tour/domain/entities/tour_detail_entity.dart';
+import 'package:equatable/equatable.dart';
 
-class TourDetailModel extends TourDetailEntity {
+class TourDetailEntity extends Equatable {
   final String id;
   final String title;
   final double rating;
   final String image;
   final String description;
-  final LocalGuideModel localGuide;
-  final List<TourFeatureModel> features;
-
+  final LocalGuideEntity localGuide;
+  final List<TourFeatureEntity> features;
   bool isFavorite;
 
-  TourDetailModel({
+  TourDetailEntity({
     required this.id,
     required this.title,
     required this.rating,
     required this.description,
     this.isFavorite = false,
-    required this.localGuide,
-    required this.features,
     required this.image,
-  }) : super(
-            description: description,
-            features: features,
-            id: id,
-            image: image,
-            localGuide: localGuide,
-            rating: rating,
-            title: title,
-            isFavorite: isFavorite);
+    required this.features,
+    required this.localGuide,
+  });
 
   // from Json
-  factory TourDetailModel.fromJson(Map<String, dynamic> json) {
-    return TourDetailModel(
+  factory TourDetailEntity.fromJson(Map<String, dynamic> json) {
+    return TourDetailEntity(
       id: json['id'],
       title: json['title'],
       rating: json['rating'],
       description: json['description'],
       image: json['image'],
-      localGuide: LocalGuideModel.fromJson(json['localGuide']),
+      localGuide: LocalGuideEntity.fromJson(json['localGuide']),
       features: (json['features'] as List)
-          .map((e) => TourFeatureModel.fromJson(e))
+          .map((e) => TourFeatureEntity.fromJson(e))
           .toList(),
     );
   }
@@ -71,21 +62,21 @@ class TourDetailModel extends TourDetailEntity {
       ];
 }
 
-class LocalGuideModel extends LocalGuideEntity {
+class LocalGuideEntity {
   final String id;
   final String name;
   final String image;
 
-  LocalGuideModel({
+  LocalGuideEntity({
     required this.id,
     required this.name,
     required this.image,
-  }) : super(id: id, image: image, name: name);
+  });
 
   // from Json
 
-  factory LocalGuideModel.fromJson(Map<String, dynamic> json) {
-    return LocalGuideModel(
+  factory LocalGuideEntity.fromJson(Map<String, dynamic> json) {
+    return LocalGuideEntity(
       id: json['id'],
       name: json['name'],
       image: json['image'],
@@ -103,21 +94,21 @@ class LocalGuideModel extends LocalGuideEntity {
   }
 }
 
-class TourFeatureModel extends TourFeatureEntity {
+class TourFeatureEntity {
   final String id;
   final String title;
   final String image;
 
-  TourFeatureModel({
+  TourFeatureEntity({
     required this.id,
     required this.image,
     required this.title,
-  }) : super(id: id, image: image, title: title);
+  });
 
   // from Json
 
-  factory TourFeatureModel.fromJson(Map<String, dynamic> json) {
-    return TourFeatureModel(
+  factory TourFeatureEntity.fromJson(Map<String, dynamic> json) {
+    return TourFeatureEntity(
       id: json['id'],
       title: json['title'],
       image: json['image'],
