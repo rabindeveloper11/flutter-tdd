@@ -1,12 +1,13 @@
 import 'package:flutter_assesment/features/tour/domain/entities/tour_detail_entity.dart';
 
 class TourDetailModel extends TourDetailEntity {
-  final String id;
+  final String id; 
   final String title;
   final double rating;
   final String image;
   final String description;
   final LocalGuideModel localGuide;
+
   final List<TourFeatureModel> features;
 
   bool isFavorite;
@@ -59,7 +60,6 @@ class TourDetailModel extends TourDetailEntity {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         title,

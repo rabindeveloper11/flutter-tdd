@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/config/routes/route_contants.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
@@ -34,7 +36,19 @@ class PopularCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(top: 16.h, right: 16.w, child: const LikeButton()),
+          Positioned(
+              top: 16.h,
+              right: 16.w,
+              child: InkWell(
+                  onTap: () async {
+                    // await HiveService.deleteData(
+                    //   HiveService.saved,
+                    //   0,
+                    // );
+                    // final data = await HiveService.getData(HiveService.saved);
+                    // print(data);
+                  },
+                  child: const LikeButton())),
           Positioned(
             bottom: 28.h,
             left: 24.w,

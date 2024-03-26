@@ -19,6 +19,7 @@ class TourRemoteDetailDataSourceImpl implements TourRemoteDetailDataSource {
 
     if (res.statusCode == 200) {
       /// this  is the dummy data that is returned from the server
+
       return tourDetailData;
     } else {
       throw ServerException();

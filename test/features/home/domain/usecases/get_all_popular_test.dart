@@ -23,13 +23,13 @@ void main() {
 
   final allPopulars = [
     PopularEntity(
-      id: '12324fdf',
+      id: 1,
       title: "Popular 1",
       rating: 4.5,
       image: 'image_url',
     ),
     PopularEntity(
-      id: '12324fdf',
+      id:2,
       title: "Popular 2",
       rating: 4.5,
       image: 'image_url',

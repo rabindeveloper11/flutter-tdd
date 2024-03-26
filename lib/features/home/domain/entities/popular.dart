@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class PopularEntity extends Equatable {
-  final String id;
+  final int id;
   final String title;
   final double rating;
   bool isFavorite;

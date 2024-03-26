@@ -5,4 +5,6 @@ import 'package:flutter_assesment/features/home/domain/entities/popular.dart';
 abstract class PopularRepository {
   Future<Either<Failure, List<PopularEntity>>> getAllPopular();
     Future<Either<Failure, List<PopularEntity>>> search(String query);
+    Future<Either<Failure, bool>> toggleFavorite(PopularEntity entity);
+    
 }

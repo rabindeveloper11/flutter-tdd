@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
 import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
+import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/popular_model.dart';
+import 'package:flutter_assesment/service_locator.dart';
 import 'package:http/http.dart' as http;
 
 abstract class PopularRemoteDataSource {
@@ -32,12 +33,18 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
       /// and the response is also correct
       /// returning the empty list of popular for now
       ///
-      final List<PopularModel> populars = [];
+      ///
+
+      /// saving the data to local storage
+
+      popularDummyData.map((e) async {
+        await locator<PopularLocalDataSourceImpl>().savePopular(e.toJson());
+      });
 
       /// here we can carry out the mapping of the response to the model
       /// since the api that are required my the UI are is not found with the
       /// initial research, we are returning the empty list of popular
-      return populars;
+      return popularDummyData;
     } else {
       /// we are throwing the ServerException in case of any error from the server
       /// we can also throw the custom exception here

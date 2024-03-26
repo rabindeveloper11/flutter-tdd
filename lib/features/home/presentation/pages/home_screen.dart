@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
+import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
+import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_event.dart';
@@ -89,8 +92,30 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SpacingUtil.verticalSpacing(28.h),
-              const SectionHeading(
-                title: 'Category',
+              InkWell(
+                onTap: () async {
+                  await locator<HiveService>().addData(
+                    HiveService.savedPopular,
+                    popularDummyData[0].toJson(),
+                  );
+                  final data = await locator<HiveService>()
+                      .getData(HiveService.savedPopular);
+
+                  print(data);
+
+                  final data1 = await PopularLocalDataSourceImpl(
+                          hiveService: HiveService())
+                      .getSavedPopulars();
+
+                  data1.forEach((element) {
+                    print(element.title);
+                  });
+
+                  // print(data1);
+                },
+                child: const SectionHeading(
+                  title: 'Category',
+                ),
               ),
               SpacingUtil.verticalSpacing(16.h),
               CategorySection(categories: dummyCategories),

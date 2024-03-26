@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/config/routes/route.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_bloc.dart';
@@ -11,7 +12,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
+  await HiveService.init();
+  await HiveService().openBox();
   setUpLocator();
+
   runApp(const MyApp());
 }
 

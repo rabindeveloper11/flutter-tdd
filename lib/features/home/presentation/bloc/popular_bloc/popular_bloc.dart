@@ -28,5 +28,13 @@ class PopularBloc extends Bloc<PopularEvent, PopularState> {
         ),
       );
     });
+
+    on<ToggleFavoriteEvent>((event, emit) async {
+      emit(PopularLoading()); 
+    
+     
+      
+    });
+
   }
 }

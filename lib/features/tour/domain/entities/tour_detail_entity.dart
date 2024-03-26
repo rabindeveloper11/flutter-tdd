@@ -2,10 +2,12 @@ import 'package:equatable/equatable.dart';
 
 class TourDetailEntity extends Equatable {
   final String id;
+
   final String title;
   final double rating;
   final String image;
   final String description;
+
   final LocalGuideEntity localGuide;
   final List<TourFeatureEntity> features;
   bool isFavorite;
@@ -50,7 +52,6 @@ class TourDetailEntity extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         title,

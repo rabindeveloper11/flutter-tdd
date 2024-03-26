@@ -27,8 +27,6 @@ class PopularRepositoryImpl implements PopularRepository {
   
   @override
   Future<Either<Failure, List<PopularEntity>>> search(String query) async{
-   
-
    try {
       final res = await remoteDataSource.search(query);
       return Right(res);
@@ -38,5 +36,11 @@ class PopularRepositoryImpl implements PopularRepository {
       return const Left(ConnectionFailure(message: 'No Internet Connections'));
     }
 
+  }
+  
+  @override
+  Future<Either<Failure, bool>> toggleFavorite(PopularEntity entity) {
+    
+    throw UnimplementedError();
   }
 }

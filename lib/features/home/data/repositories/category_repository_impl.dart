@@ -1,5 +1,3 @@
-
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
 import 'package:flutter_assesment/core/error/failure.dart';
@@ -15,7 +13,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
     try {
-      final res = await remoteDataSource.getCategories();
+      final res = await remoteDataSource.getCategories(); 
 
       return Right(res);
     } on SocketException {

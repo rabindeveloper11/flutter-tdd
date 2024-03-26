@@ -4,13 +4,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:convert' as _i20;
-import 'dart:typed_data' as _i22;
+import 'dart:convert' as _i22;
+import 'dart:typed_data' as _i24;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart'
+    as _i20;
 import 'package:flutter_assesment/core/error/failure.dart' as _i9;
 import 'package:flutter_assesment/features/home/data/data_sources/category_remote_data_source.dart'
     as _i11;
+import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart'
+    as _i21;
 import 'package:flutter_assesment/features/home/data/data_sources/popular_remote_data_source.dart'
     as _i15;
 import 'package:flutter_assesment/features/home/data/models/category_model.dart'
@@ -39,7 +43,7 @@ import 'package:flutter_assesment/features/tour/domain/usecases/get_tour_detail.
     as _i19;
 import 'package:http/http.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i21;
+import 'package:mockito/src/dummies.dart' as _i23;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -307,6 +311,24 @@ class MockPopularRepository extends _i1.Mock implements _i4.PopularRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, List<_i14.PopularEntity>>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, bool>> toggleFavorite(
+          _i14.PopularEntity? entity) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #toggleFavorite,
+          [entity],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, bool>>.value(
+            _FakeEither_0<_i9.Failure, bool>(
+          this,
+          Invocation.method(
+            #toggleFavorite,
+            [entity],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, bool>>);
 }
 
 /// A class which mocks [PopularRemoteDataSource].
@@ -394,6 +416,24 @@ class MockGetAllPopularUsecase extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, List<_i14.PopularEntity>>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, bool>> toggleFavorite(
+          _i14.PopularEntity? entity) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #toggleFavorite,
+          [entity],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, bool>>.value(
+            _FakeEither_0<_i9.Failure, bool>(
+          this,
+          Invocation.method(
+            #toggleFavorite,
+            [entity],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, bool>>);
 }
 
 /// A class which mocks [TourRepository].
@@ -486,6 +526,152 @@ class MockGetTourDetailUseCase extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i9.Failure, _i5.TourDetailEntity>>);
 }
 
+/// A class which mocks [HiveService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveService extends _i1.Mock implements _i20.HiveService {
+  MockHiveService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<void> openBox() => (super.noSuchMethod(
+        Invocation.method(
+          #openBox,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> closeBox() => (super.noSuchMethod(
+        Invocation.method(
+          #closeBox,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> clearBox(String? boxName) => (super.noSuchMethod(
+        Invocation.method(
+          #clearBox,
+          [boxName],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> deleteBox(String? boxName) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteBox,
+          [boxName],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> addData(
+    String? boxName,
+    Map<String, dynamic>? data,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addData,
+          [
+            boxName,
+            data,
+          ],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<Map<String, dynamic>>> getData(String? boxName) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getData,
+          [boxName],
+        ),
+        returnValue: _i8.Future<List<Map<String, dynamic>>>.value(
+            <Map<String, dynamic>>[]),
+      ) as _i8.Future<List<Map<String, dynamic>>>);
+
+  @override
+  _i8.Future<void> deleteData(
+    String? boxName,
+    int? index,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteData,
+          [
+            boxName,
+            index,
+          ],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+}
+
+/// A class which mocks [PopularLocalDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPopularLocalDataSource extends _i1.Mock
+    implements _i21.PopularLocalDataSource {
+  MockPopularLocalDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<List<_i16.PopularModel>> getSavedPopulars() => (super.noSuchMethod(
+        Invocation.method(
+          #getSavedPopulars,
+          [],
+        ),
+        returnValue:
+            _i8.Future<List<_i16.PopularModel>>.value(<_i16.PopularModel>[]),
+      ) as _i8.Future<List<_i16.PopularModel>>);
+
+  @override
+  _i8.Future<List<_i16.PopularModel>> search(String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue:
+            _i8.Future<List<_i16.PopularModel>>.value(<_i16.PopularModel>[]),
+      ) as _i8.Future<List<_i16.PopularModel>>);
+
+  @override
+  _i8.Future<void> savePopular(Map<String, dynamic>? data) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #savePopular,
+          [data],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> deletePopular(int? index) => (super.noSuchMethod(
+        Invocation.method(
+          #deletePopular,
+          [index],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -541,7 +727,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i20.Encoding? encoding,
+    _i22.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -572,7 +758,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i20.Encoding? encoding,
+    _i22.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -603,7 +789,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i20.Encoding? encoding,
+    _i22.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -634,7 +820,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i20.Encoding? encoding,
+    _i22.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -671,7 +857,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i8.Future<String>.value(_i21.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i23.dummyValue<String>(
           this,
           Invocation.method(
             #read,
@@ -682,7 +868,7 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
       ) as _i8.Future<String>);
 
   @override
-  _i8.Future<_i22.Uint8List> readBytes(
+  _i8.Future<_i24.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -692,8 +878,8 @@ class MockHttpClient extends _i1.Mock implements _i7.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i8.Future<_i22.Uint8List>.value(_i22.Uint8List(0)),
-      ) as _i8.Future<_i22.Uint8List>);
+        returnValue: _i8.Future<_i24.Uint8List>.value(_i24.Uint8List(0)),
+      ) as _i8.Future<_i24.Uint8List>);
 
   @override
   _i8.Future<_i7.StreamedResponse> send(_i7.BaseRequest? request) =>

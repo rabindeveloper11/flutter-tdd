@@ -1,7 +1,7 @@
 import 'package:flutter_assesment/features/home/domain/entities/popular.dart';
 
 class PopularModel extends PopularEntity {
-  final String id;
+  final int id;
   final String title;
   final double rating;
   bool isFavorite;
@@ -21,23 +21,22 @@ class PopularModel extends PopularEntity {
           image: image,
         );
 
-  // from Json
   factory PopularModel.fromJson(Map<String, dynamic> json) {
     return PopularModel(
       id: json['id'],
       title: json['title'],
       rating: json['rating'],
+      isFavorite: json['isFavorite'],
       image: json['image'],
     );
   }
-
-  // toJson
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
       'rating': rating,
+      'isFavorite': isFavorite,
       'image': image,
     };
   }

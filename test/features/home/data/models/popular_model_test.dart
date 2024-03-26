@@ -8,7 +8,7 @@ import '../../../../helpers/json_reader.dart';
 
 void main() {
   final testPopularModel = PopularModel(
-    id: '1',
+    id: 1,
     title: 'test',
     image: 'test',
     rating: 4.8,
@@ -49,10 +49,11 @@ void main() {
     /// assert
 
     final expectedJsonMap = {
-      "id": "1",
+      "id": 1,
       "title": "test",
       "image": "test",
       "rating": 4.8,
+      "isFavorite": false
     };
 
     expect(result, expectedJsonMap);

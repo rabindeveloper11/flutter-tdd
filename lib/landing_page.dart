@@ -15,8 +15,14 @@ class LandingPage extends StatelessWidget {
     /// if that is not the case the pages will not be rendered in the UI
     final pages = [
       HomeScreen(),
-      const Center(child: Text("Liked Screen")),
-      const Center(child: Text("Chat Screen")),
+      Center(
+          child: InkWell(
+              onTap: () async {
+                // final data = await HiveService.getData(HiveService.saved);
+                // print(data);
+              },
+              child: Text("Liked Screen"))),
+      Center(child: InkWell(onTap: () {}, child: Text("Chat Screen"))),
       const Center(child: Text("Settings Screen")),
     ];
     return ValueListenableBuilder(

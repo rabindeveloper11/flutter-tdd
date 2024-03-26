@@ -16,5 +16,13 @@ class GetAllPopularUsecase {
   /// searches for the product
   Future<Either<Failure, List<PopularEntity>>> search(String query) async {
     return repository.search(query);
+  }  
+
+  /// saves the favorite status of a popular to local storage 
+  
+  Future<Either<Failure, bool>> toggleFavorite(PopularEntity entity) async {
+    return repository.toggleFavorite(entity);
   }
+
+  
 }

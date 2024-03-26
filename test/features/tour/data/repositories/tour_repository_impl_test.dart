@@ -1,6 +1,5 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
-import 'package:flutter_assesment/features/home/data/repositories/category_repository_impl.dart';
-import 'package:flutter_assesment/features/tour/data/data-sources/tour_detail_data_source.dart';
 import 'package:flutter_assesment/features/tour/data/models/tour_detail_model.dart';
 import 'package:flutter_assesment/features/tour/data/repositories/tour_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,7 +42,7 @@ void main() {
       final result = await mockCategoryRepository.getTourDetail();
 
       expect(mockCategoryRepository.getTourDetail(), completes);
-      expect(result, isA<TourDetailModel>());
+      expect(result, equals(Right(tourDetailData)));
     });
 
     test("Testing for server exception", () async {
