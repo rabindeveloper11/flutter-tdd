@@ -4,7 +4,6 @@ import 'package:flutter_assesment/core/error/exception.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/local/category_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/category_model.dart';
 import 'package:flutter_assesment/service_locator.dart';
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 abstract class CategoryRemoteDataSource {
@@ -60,10 +59,19 @@ class CategorySourceDataImpl implements CategoryRemoteDataSource {
   @override
   Future<List<CategoryModel>> search(String query) {
     searchFromList() async {
-      final products = dummyCategories.where((element) {
-        return element.name.contains(query);
-      }).toList();
-      return products;
+      List<CategoryModel> categories = [];
+      final data = await CategoryLocalDataSourceImpl(hiveService: locator())
+          .getSavedCategories();
+
+      for (final singleData in data) {
+        if (singleData.name.toLowerCase().contains(
+              query.toLowerCase(),
+            )) {
+          categories.add(singleData);
+        }
+      }
+
+      return categories;
     }
 
     return searchFromList();

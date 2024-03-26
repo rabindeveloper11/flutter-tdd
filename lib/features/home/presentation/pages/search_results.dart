@@ -19,18 +19,16 @@ class SearchResults extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Search Results'),
       ),
-      body: Column(
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SearchedCategoriesSection(),
-          SpacingUtil.verticalSpacing(48.h),
-          const SearchedPopularsSections(),
+          SearchedCategoriesSection(),
+          SearchedPopularsSections(),
         ],
       ),
     );
   }
 }
-
-
 
 class SearchedCategoriesSection extends StatelessWidget {
   const SearchedCategoriesSection({super.key});
@@ -53,6 +51,7 @@ class SearchedCategoriesSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SpacingUtil.verticalSpacing(24.h),
                 const SectionHeading(
                   title: 'Category',
                 ),
@@ -60,6 +59,7 @@ class SearchedCategoriesSection extends StatelessWidget {
                   Container(
                       constraints: BoxConstraints(minHeight: 200.h),
                       child: const Center(child: Text('No categories found'))),
+                SpacingUtil.verticalSpacing(16.h),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -76,7 +76,8 @@ class SearchedCategoriesSection extends StatelessWidget {
                       },
                     ),
                   ),
-                )
+                ),
+                SpacingUtil.verticalSpacing(32.h),
               ],
             ),
           );

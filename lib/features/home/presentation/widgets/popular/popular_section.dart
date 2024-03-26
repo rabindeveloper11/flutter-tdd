@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_bloc.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_event.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_state.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/popular/popular_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PopularSection extends StatelessWidget {
   final List<CategoryEntity> categories;
@@ -9,18 +13,39 @@ class PopularSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-            popularDummyData.length,
-            (index) => Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: PopularCard(
-                    popular: popularDummyData[index],
+    context.read<PopularBloc>().add(const GetPopularsEvent());
+    return BlocBuilder<PopularBloc, PopularState>(
+      builder: (context, state) {
+        if (state is PopularLoading) {
+          return Container(
+              constraints: BoxConstraints(minHeight: 52.h),
+              child: const Center(child: CircularProgressIndicator.adaptive()));
+        }
+
+        if (state is PopularError) {
+          return Center(child: Text(state.message));
+        }
+
+        if (state is PopularLoaded) {
+          return state.populars.isEmpty
+              ? Container(
+                  constraints: BoxConstraints(minHeight: 52.h),
+                  child: const Center(child: Text('No Populars Found')))
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: state.populars
+                        .map((popular) => Padding(
+                              padding: EdgeInsets.only(right: 12.sp),
+                              child: PopularCard(popular: popular),
+                            ))
+                        .toList(),
                   ),
-                )),
-      ),
+                );
+        }
+
+        return SizedBox();
+      },
     );
   }
 }

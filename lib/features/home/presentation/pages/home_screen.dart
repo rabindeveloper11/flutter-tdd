@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
-import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/config/routes/route_contants.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
@@ -12,10 +11,8 @@ import 'package:flutter_assesment/features/home/presentation/widgets/category/ca
 import 'package:flutter_assesment/features/home/presentation/widgets/popular/popular_section.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/section_heading.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
-import 'package:flutter_assesment/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -67,6 +64,9 @@ class HomeScreen extends StatelessWidget {
                       context
                           .read<PopularBloc>()
                           .add(SeachPopularsEvent(value));
+                      context
+                          .read<CategoryBloc>()
+                          .add(SearchCategoriesEvent(value));
                     },
                     cursorHeight: 24,
                     decoration: InputDecoration(
@@ -92,18 +92,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SpacingUtil.verticalSpacing(28.h),
-              InkWell(
-                onTap: () async {
-                  // context.read<CategoryBloc>().add(GetCategoriesEvent());
-                  context.read<PopularBloc>().add(GetPopularsEvent());
-
-                  final data = await locator<HiveService>()
-                      .getData(HiveService.savedPopular);
-                  print(data.length);
-                },
-                child: const SectionHeading(
-                  title: 'Category',
-                ),
+              const SectionHeading(
+                title: 'Category',
               ),
               SpacingUtil.verticalSpacing(16.h),
               CategorySection(categories: dummyCategories),
