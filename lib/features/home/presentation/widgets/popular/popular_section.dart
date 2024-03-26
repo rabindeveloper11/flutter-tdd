@@ -34,17 +34,17 @@ class PopularSection extends StatelessWidget {
               : SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: state.populars
-                        .map((popular) => Padding(
-                              padding: EdgeInsets.only(right: 12.sp),
-                              child: PopularCard(popular: popular),
-                            ))
-                        .toList(),
+                    children: state.populars.map((popular) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: 12.sp),
+                        child: PopularCard(popular: popular),
+                      );
+                    }).toList(),
                   ),
                 );
         }
 
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

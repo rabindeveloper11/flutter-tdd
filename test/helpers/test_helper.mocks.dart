@@ -360,6 +360,24 @@ class MockPopularRemoteDataSource extends _i1.Mock
         returnValue:
             _i8.Future<List<_i16.PopularModel>>.value(<_i16.PopularModel>[]),
       ) as _i8.Future<List<_i16.PopularModel>>);
+
+  @override
+  _i8.Future<void> toggleSaved({
+    required Map<String, dynamic>? data,
+    required int? index,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #toggleSaved,
+          [],
+          {
+            #data: data,
+            #index: index,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [GetAllPopularUsecase].
@@ -613,6 +631,25 @@ class MockHiveService extends _i1.Mock implements _i20.HiveService {
           [
             boxName,
             index,
+          ],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> updateData(
+    String? boxName,
+    int? index,
+    Map<String, dynamic>? data,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateData,
+          [
+            boxName,
+            index,
+            data,
           ],
         ),
         returnValue: _i8.Future<void>.value(),

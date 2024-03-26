@@ -1,8 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
-import 'package:flutter_assesment/core/helpers/list_unique_checker.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/popular_model.dart';
 import 'package:flutter_assesment/service_locator.dart';
@@ -11,6 +9,8 @@ import 'package:http/http.dart' as http;
 abstract class PopularRemoteDataSource {
   Future<List<PopularModel>> getPopulars();
   Future<List<PopularModel>> search(String query);
+  Future<void> toggleSaved(
+      {required Map<String, dynamic> data, required int index});
 }
 
 class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
@@ -41,19 +41,18 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
       ///
 
       /// clearing the previous data
-      await locator<HiveService>().clearBox(HiveService.savedPopular);
 
       ///
-      for (var popular in popularDummyData) {
-        final isUnique = ListUniqueChecker.isUnique(
-          await locator<PopularLocalDataSourceImpl>().getSavedPopulars(),
-          popular,
-        );
-        if (isUnique) {
-          await locator<PopularLocalDataSourceImpl>()
-              .savePopular(popular.toJson());
-        }
-      }
+      // for (var popular in popularDummyData) {
+      //   final isUnique = ListUniqueChecker.isUnique(
+      //     await locator<PopularLocalDataSourceImpl>().getSavedPopulars(),
+      //     popular,
+      //   );
+      //   if (isUnique) {
+      //     await locator<PopularLocalDataSourceImpl>()
+      //         .savePopular(popular.toJson());
+      //   }
+      // }
 
       /// here we can carry out the mapping of the response to the model
       /// since the api that are required my the UI are is not found with the
@@ -86,5 +85,19 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
     }
 
     return searchFromList();
+  }
+
+  Future<void> toggleSaved(
+      {required Map<String, dynamic> data, required int index}) async {
+    final data1 =
+        await locator<PopularLocalDataSourceImpl>().getSavedPopulars();
+    print(data1[0].toJson());
+
+    await locator<HiveService>()
+        .updateData(HiveService.savedPopular, index, data);
+
+    final data2 =
+        await locator<PopularLocalDataSourceImpl>().getSavedPopulars();
+    print(data2[0].toJson());
   }
 }

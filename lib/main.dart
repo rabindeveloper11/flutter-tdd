@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/config/routes/route.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
+import 'package:flutter_assesment/features/home/domain/entities/popular.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_bloc.dart';
 import 'package:flutter_assesment/landing_page.dart';
 import 'package:flutter_assesment/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
+
   await HiveService.init();
+  Hive.registerAdapter(PopularEntityAdapter());
+
   await HiveService().openBox();
   setUpLocator();
 
