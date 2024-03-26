@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
+import 'package:flutter_assesment/core/helpers/list_unique_checker.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/popular_model.dart';
 import 'package:flutter_assesment/service_locator.dart';
@@ -40,13 +41,18 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
       ///
 
       /// clearing the previous data
-
       await locator<HiveService>().clearBox(HiveService.savedPopular);
 
       ///
       for (var popular in popularDummyData) {
-        await locator<PopularLocalDataSourceImpl>()
-            .savePopular(popular.toJson());
+        final isUnique = ListUniqueChecker.isUnique(
+          await locator<PopularLocalDataSourceImpl>().getSavedPopulars(),
+          popular,
+        );
+        if (isUnique) {
+          await locator<PopularLocalDataSourceImpl>()
+              .savePopular(popular.toJson());
+        }
       }
 
       /// here we can carry out the mapping of the response to the model
