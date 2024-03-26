@@ -29,7 +29,7 @@ class TourPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Hero(tag: 'popular_card', child: TourImageCard()),
+                  TourImageCard(),
                   SpacingUtil.verticalSpacing(28),
                   const Text(
                     'Shulgaт-Tash cave ',

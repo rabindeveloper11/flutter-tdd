@@ -1,8 +1,10 @@
 import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/local/category_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/category_model.dart';
 import 'package:flutter_assesment/service_locator.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 abstract class CategoryRemoteDataSource {
@@ -26,10 +28,16 @@ class CategorySourceDataImpl implements CategoryRemoteDataSource {
     if (response.statusCode == 200) {
       /// saving the data to local storage
       ///
+      ///
 
-      dummyCategories.map((e) async {
-        await locator<CategoryLocalDataSourceImpl>().saveCategory(e.toJson());
-      });
+      /// clearing the old data
+
+      await locator<HiveService>().clearBox(HiveService.savedCategories);
+
+      for (var category in dummyCategories) {
+        await locator<CategoryLocalDataSourceImpl>()
+            .saveCategory(category.toJson());
+      }
 
       /// converting into the model and returning the list of categories from here
       /// currently assuming that the modeling is done correctly

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
-import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
+import 'package:flutter_assesment/config/routes/route_contants.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
-import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
-import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_bloc.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_event.dart';
 import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_bloc.dart';
@@ -17,6 +15,7 @@ import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_assesment/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,8 +28,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +63,11 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: TextField(
+                    onChanged: (value) async {
+                      context
+                          .read<PopularBloc>()
+                          .add(SeachPopularsEvent(value));
+                    },
                     cursorHeight: 24,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -74,44 +77,29 @@ class HomeScreen extends StatelessWidget {
                           .textTheme
                           .bodySmall!
                           .copyWith(fontSize: 15.sp),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: SVGUtils.svgFromAsset(Assets.icons.search),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(RouteConstants.searchResultsPage);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SVGUtils.svgFromAsset(Assets.icons.search),
+                        ),
                       ),
                     ),
-                    onChanged: (query) {
-                      context
-                          .read<PopularBloc>()
-                          .add(SeachPopularsEvent(query));
-
-                      context
-                          .read<CategoryBloc>()
-                          .add(SearchCategoriesEvent(query));
-                    },
                   ),
                 ),
               ),
               SpacingUtil.verticalSpacing(28.h),
               InkWell(
                 onTap: () async {
-                  await locator<HiveService>().addData(
-                    HiveService.savedPopular,
-                    popularDummyData[0].toJson(),
-                  );
+                  // context.read<CategoryBloc>().add(GetCategoriesEvent());
+                  context.read<PopularBloc>().add(GetPopularsEvent());
+
                   final data = await locator<HiveService>()
                       .getData(HiveService.savedPopular);
-
-                  print(data);
-
-                  final data1 = await PopularLocalDataSourceImpl(
-                          hiveService: HiveService())
-                      .getSavedPopulars();
-
-                  data1.forEach((element) {
-                    print(element.title);
-                  });
-
-                  // print(data1);
+                  print(data.length);
                 },
                 child: const SectionHeading(
                   title: 'Category',

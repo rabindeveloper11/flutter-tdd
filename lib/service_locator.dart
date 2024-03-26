@@ -48,16 +48,14 @@ void setUpLocator() async {
   locator.registerLazySingleton<PopularRemoteDataSource>(
       () => PopularRemoteDataSourceImpl(client: locator()));
 
-  locator.registerLazySingleton<CategoryLocalDataSource>(
+  locator.registerLazySingleton<CategoryLocalDataSourceImpl>(
       () => CategoryLocalDataSourceImpl(hiveService: locator()));
 
-  locator.registerLazySingleton<PopularLocalDataSource>(
+  locator.registerLazySingleton<PopularLocalDataSourceImpl>(
       () => PopularLocalDataSourceImpl(hiveService: locator()));
 
-      locator.registerLazySingleton<TourLocalDataSource>(
+  locator.registerLazySingleton<TourLocalDataSource>(
       () => TourLocalDataSourceImpl(hiveService: locator()));
-
-      
 
   /// external dependencies
   ///

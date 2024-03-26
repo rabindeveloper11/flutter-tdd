@@ -8,7 +8,9 @@ import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TourImageCard extends StatelessWidget {
-  const TourImageCard({super.key});
+  TourImageCard({super.key});
+
+  final ValueNotifier<bool> isFav = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,18 @@ class TourImageCard extends StatelessWidget {
               onTap: () => Navigator.pop(context),
               child: SVGUtils.svgFromAsset(Assets.icons.back)),
         ),
-        const Positioned(bottom: -10, right: 28, child: LikeButton()),
+        Positioned(
+            bottom: -10,
+            right: 28,
+            child: GestureDetector(
+                onTap: () {
+                  isFav.value = !isFav.value;
+                },
+                child: ValueListenableBuilder(
+                    valueListenable: isFav,
+                    builder: (context, value, child) => LikeButton(
+                          isFav: isFav.value,
+                        )))),
         Positioned(
           bottom: 24.h,
           left: 24.w,

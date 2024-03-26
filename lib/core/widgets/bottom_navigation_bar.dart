@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
-import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBottomNavigationItem {

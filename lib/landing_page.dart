@@ -14,7 +14,7 @@ class LandingPage extends StatelessWidget {
     /// pages should be the same length as the number of items in the bottom navigation bar
     /// if that is not the case the pages will not be rendered in the UI
     final pages = [
-      HomeScreen(),
+     const  HomeScreen(),
       Center(
           child: InkWell(
               onTap: () async {

@@ -1,21 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
-import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/config/routes/route_contants.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
 import 'package:flutter_assesment/core/widgets/like_button.dart';
+import 'package:flutter_assesment/features/home/domain/entities/popular.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PopularCard extends StatelessWidget {
-  const PopularCard({super.key});
+  final PopularEntity popular;
+  PopularCard({super.key, required this.popular});
+
+  final isFav = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
+    isFav.value = popular.isFavorite;
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, RouteConstants.tourPage);
@@ -26,9 +28,8 @@ class PopularCard extends StatelessWidget {
             width: 212.w,
             height: 280.h,
             decoration: ShapeDecoration(
-              image: const DecorationImage(
-                image: CachedNetworkImageProvider(
-                    "https://images.unsplash.com/photo-1711100360031-24aaccbcd408?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(popular.image),
                 fit: BoxFit.cover,
               ),
               shape: RoundedRectangleBorder(
@@ -41,14 +42,15 @@ class PopularCard extends StatelessWidget {
               right: 16.w,
               child: InkWell(
                   onTap: () async {
-                    // await HiveService.deleteData(
-                    //   HiveService.saved,
-                    //   0,
-                    // );
-                    // final data = await HiveService.getData(HiveService.saved);
-                    // print(data);
+                    popular.isFavorite = !popular.isFavorite;
+                    isFav.value = popular.isFavorite;
                   },
-                  child: const LikeButton())),
+                  child: ValueListenableBuilder(
+                    valueListenable: isFav,
+                    builder: (context, value, child) => LikeButton(
+                      isFav: popular.isFavorite,
+                    ),
+                  ))),
           Positioned(
             bottom: 28.h,
             left: 24.w,
@@ -59,7 +61,7 @@ class PopularCard extends StatelessWidget {
                   constraints:
                       const BoxConstraints(maxWidth: 120, maxHeight: 40),
                   child: Text(
-                    'Monument to Salavat Yula',
+                    popular.title,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -87,7 +89,7 @@ class PopularCard extends StatelessWidget {
                           SVGUtils.svgFromAsset(Assets.icons.rate),
                           SpacingUtil.horizontalSpacing(4.w),
                           Text(
-                            '4,9',
+                            popular.rating.toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!

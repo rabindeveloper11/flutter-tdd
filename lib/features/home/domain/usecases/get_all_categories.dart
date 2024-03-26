@@ -12,7 +12,9 @@ class GetAllCategoriesUserCase {
     return repository.getCategories();
   }
 
-  Future<Either<Failure, List<CategoryEntity>>> search(String query) async {
+  Future<Either<Failure, List<CategoryEntity>>> search(String query) async { 
+
+    
     return repository.search(query);
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
-import 'package:flutter_assesment/features/home/presentation/widgets/category/category_card.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/popular/popular_card.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PopularSection extends StatelessWidget {
   final List<CategoryEntity> categories;
@@ -13,18 +12,13 @@ class PopularSection extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        // children: categories
-        //     .map((category) => Padding(
-        //           padding: EdgeInsets.only(right: 12.sp),
-        //           child: CategoryCard(category: category),
-        //         ))
-        //     .toList(),
-
         children: List.generate(
-            3,
+            popularDummyData.length,
             (index) => Padding(
                   padding: const EdgeInsets.only(right: 12.0),
-                  child: PopularCard(),
+                  child: PopularCard(
+                    popular: popularDummyData[index],
+                  ),
                 )),
       ),
     );

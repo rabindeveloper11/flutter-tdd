@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_assesment/config/dummy_data/popular_dummy_data.dart';
+import 'package:flutter_assesment/config/local_database/hive_db_service.dart';
 import 'package:flutter_assesment/core/error/exception.dart';
 import 'package:flutter_assesment/features/home/data/data_sources/local/popular_local_data_source.dart';
 import 'package:flutter_assesment/features/home/data/models/popular_model.dart';
@@ -36,10 +37,17 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
       ///
 
       /// saving the data to local storage
+      ///
 
-      popularDummyData.map((e) async {
-        await locator<PopularLocalDataSourceImpl>().savePopular(e.toJson());
-      });
+      /// clearing the previous data
+
+      await locator<HiveService>().clearBox(HiveService.savedPopular);
+
+      ///
+      for (var popular in popularDummyData) {
+        await locator<PopularLocalDataSourceImpl>()
+            .savePopular(popular.toJson());
+      }
 
       /// here we can carry out the mapping of the response to the model
       /// since the api that are required my the UI are is not found with the
@@ -56,10 +64,18 @@ class PopularRemoteDataSourceImpl implements PopularRemoteDataSource {
   Future<List<PopularModel>> search(String query) async {
     /// mocking the real server request delay in real api scenario
     searchFromList() async {
-      await Future.delayed(const Duration(milliseconds: 800));
-      final products = popularDummyData.where((element) {
-        return element.title.contains(query);
-      }).toList();
+      List<PopularModel> products = [];
+      final data = await PopularLocalDataSourceImpl(hiveService: locator())
+          .getSavedPopulars();
+
+      for (final singleData in data) {
+        if (singleData.title.toLowerCase().contains(
+              query.toLowerCase(),
+            )) {
+          products.add(singleData);
+        }
+      }
+
       return products;
     }
 
