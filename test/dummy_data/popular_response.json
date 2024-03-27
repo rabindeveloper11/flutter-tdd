@@ -1,0 +1,7 @@
+ { 
+        "id": 1,  
+        "title": "The Test 1",
+        "rating": 4.8,
+        "image": "https://www.imdb.com/title/tt0111161/mediaviewer/rm4248991232",
+        "isFavorite": false
+    }

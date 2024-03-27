@@ -20,28 +20,29 @@ void main() {
   group('Categories Testing', () {
     test('Testing for the categories when response is 200 ', () async {
       // arrange
-// passing the empty url to the string because of the fact that the UI and
-// the public API are not quite a match
+      /// passing the empty url to the string because of the fact that the UI and
+      /// the public API are not quite a match
 
-      when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      when(mockHttpClient.get(any)).thenAnswer(
         (_) async => http.Response(
           readJson('dummy_data/category_response.json'),
           200,
         ),
       );
-      //act
+
+      ///act
 
       final result = await categoryRemoteDataSource.getCategories();
 
-      //assert
+      ///assert
 
       expect(result, isA<List<CategoryModel>>());
     });
   });
 
   test("Testing for the categories when the response is not 200 ", () async {
-    // testing the class
-    when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+    /// testing the class
+    when(mockHttpClient.get(any)).thenAnswer(
       (_) async => http.Response(
         'Error occurred',
         404,
@@ -52,5 +53,33 @@ void main() {
       () async => categoryRemoteDataSource.getCategories(),
       throwsA(isA<ServerException>()),
     );
+  });
+
+  test("Testing for the search when the query is empty", () async {
+    /// testing the class
+    when(mockHttpClient.get(any)).thenAnswer(
+      (_) async => http.Response(
+        readJson('dummy_data/category_response.json'),
+        200,
+      ),
+    );
+
+    final result = await categoryRemoteDataSource.search('');
+
+    expect(result, isA<List<CategoryModel>>());
+  });
+
+  test("Testing for the search when the query is not empty", () async {
+    /// testing the class
+    when(mockHttpClient.get(Uri.parse(''))).thenAnswer(
+      (_) async => http.Response(
+        readJson('dummy_data/category_response.json'),
+        200,
+      ),
+    );
+
+    final result = await categoryRemoteDataSource.search('Top 30 Places');
+
+    expect(result, isA<List<CategoryModel>>());
   });
 }

@@ -1,0 +1,24 @@
+[ 
+    { 
+        "id": "1",  
+        "title": "The Test 1",
+        "rating": 4.8,
+        "image": "https://www.imdb.com/title/tt0111161/mediaviewer/rm4248991232"
+    },
+
+
+    { 
+        "id": "2",  
+        "title": "The Test 2",
+        "rating": 4.8,
+        "image": "https://www.imdb.com/title/tt0111161/mediaviewer/rm4248991232"
+    },
+
+
+    { 
+        "id": "3",  
+        "title": "The Test 3",
+        "rating": 4.8,
+        "image": "https://www.imdb.com/title/tt0111161/mediaviewer/rm4248991232"
+    }
+]

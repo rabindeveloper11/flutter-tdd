@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
@@ -7,7 +8,9 @@ import 'package:flutter_assesment/gen/assets.gen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TourImageCard extends StatelessWidget {
-  const TourImageCard({super.key});
+  TourImageCard({super.key});
+
+  final ValueNotifier<bool> isFav = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class TourImageCard extends StatelessWidget {
           height: 397.h,
           decoration: ShapeDecoration(
             image: const DecorationImage(
-              image: NetworkImage(
+              image: CachedNetworkImageProvider(
                   "https://images.unsplash.com/photo-1707327259268-2741b50ef5e5?q=80&w=2875&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
               fit: BoxFit.cover,
             ),
@@ -35,9 +38,22 @@ class TourImageCard extends StatelessWidget {
         Positioned(
           top: 24,
           left: 24,
-          child: SVGUtils.svgFromAsset(Assets.icons.back),
+          child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SVGUtils.svgFromAsset(Assets.icons.back)),
         ),
-        const Positioned(bottom: -10, right: 28, child: LikeButton()),
+        Positioned(
+            bottom: -10,
+            right: 28,
+            child: GestureDetector(
+                onTap: () {
+                  isFav.value = !isFav.value;
+                },
+                child: ValueListenableBuilder(
+                    valueListenable: isFav,
+                    builder: (context, value, child) => LikeButton(
+                          isFav: isFav.value,
+                        )))),
         Positioned(
           bottom: 24.h,
           left: 24.w,

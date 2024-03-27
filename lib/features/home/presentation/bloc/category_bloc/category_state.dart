@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_assesment/features/home/data/models/category_model.dart';
 import 'package:flutter_assesment/features/home/domain/entities/category.dart';
 
 abstract class CategoryState extends Equatable {

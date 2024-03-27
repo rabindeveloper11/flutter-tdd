@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_assesment/core/widgets/bottom_navigation_bar.dart';
 import 'package:flutter_assesment/features/home/presentation/pages/home_screen.dart';
+import 'package:flutter_assesment/features/saved/saved_screen.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
 
 class LandingPage extends StatelessWidget {
@@ -14,9 +15,9 @@ class LandingPage extends StatelessWidget {
     /// pages should be the same length as the number of items in the bottom navigation bar
     /// if that is not the case the pages will not be rendered in the UI
     final pages = [
-      HomeScreen(),
-      const Center(child: Text("Liked Screen")),
-      const Center(child: Text("Chat Screen")),
+      const HomeScreen(),
+      SavedScreen(),
+      Center(child: InkWell(onTap: () {}, child: Text("Chat Screen"))),
       const Center(child: Text("Settings Screen")),
     ];
     return ValueListenableBuilder(

@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assesment/config/dummy_data/category_dummy_data.dart';
+import 'package:flutter_assesment/config/routes/route_contants.dart';
 import 'package:flutter_assesment/core/utils/spacing.dart';
 import 'package:flutter_assesment/core/utils/svg_utils.dart';
-import 'package:flutter_assesment/features/home/domain/entities/category.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_bloc.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/category_bloc/category_event.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_bloc.dart';
+import 'package:flutter_assesment/features/home/presentation/bloc/popular_bloc/popular_event.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/category/category_section.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/popular/popular_section.dart';
 import 'package:flutter_assesment/features/home/presentation/widgets/section_heading.dart';
 import 'package:flutter_assesment/gen/assets.gen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
 // value notifier
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +25,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,6 +60,14 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: TextField(
+                    onChanged: (value) async {
+                      context
+                          .read<PopularBloc>()
+                          .add(SeachPopularsEvent(value));
+                      context
+                          .read<CategoryBloc>()
+                          .add(SearchCategoriesEvent(value));
+                    },
                     cursorHeight: 24,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -66,12 +77,16 @@ class HomeScreen extends StatelessWidget {
                           .textTheme
                           .bodySmall!
                           .copyWith(fontSize: 15.sp),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: SVGUtils.svgFromAsset(Assets.icons.search),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(RouteConstants.searchResultsPage);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SVGUtils.svgFromAsset(Assets.icons.search),
+                        ),
                       ),
-
-                      // border: InputBorder.none,
                     ),
                   ),
                 ),
@@ -81,13 +96,7 @@ class HomeScreen extends StatelessWidget {
                 title: 'Category',
               ),
               SpacingUtil.verticalSpacing(16.h),
-              CategorySection(categories: [
-                CategoryEntity(
-                    id: "1", name: "Top 30 places", image: Assets.icons.top30),
-                CategoryEntity(
-                    id: "2", name: "Nature", image: Assets.icons.nature),
-                CategoryEntity(id: "3", name: "City", image: Assets.icons.food),
-              ]),
+              CategorySection(categories: dummyCategories),
               SpacingUtil.verticalSpacing(28.h),
               const SectionHeading(
                 title: 'Popular',
@@ -98,6 +107,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-   );
+    );
   }
 }

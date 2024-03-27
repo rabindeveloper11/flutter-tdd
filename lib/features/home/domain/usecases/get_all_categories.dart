@@ -11,4 +11,10 @@ class GetAllCategoriesUserCase {
   Future<Either<Failure, List<CategoryEntity>>> call() async {
     return repository.getCategories();
   }
+
+  Future<Either<Failure, List<CategoryEntity>>> search(String query) async { 
+
+    
+    return repository.search(query);
+  }
 }

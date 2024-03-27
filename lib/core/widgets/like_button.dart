@@ -3,7 +3,9 @@ import 'package:flutter_assesment/config/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LikeButton extends StatelessWidget {
-  const LikeButton({super.key});
+  final bool isFav;
+
+  const LikeButton({super.key, this.isFav = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,12 @@ class LikeButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      child: const Center(
+      child: Center(
         child: Icon(
-          Icons.favorite,
-          color: AppColors.selectedIconColor,
+          isFav ? Icons.favorite : Icons.favorite_border,
+          color: isFav
+              ? AppColors.selectedIconColor
+              : AppColors.textFieldTextColor,
           size: 18,
         ),
       ),
